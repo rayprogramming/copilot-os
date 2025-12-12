@@ -95,9 +95,13 @@ The MCP server can be integrated with VS Code through MCP-compatible extensions 
 #### Step 1: Install an MCP-Compatible Extension
 
 Install an MCP client extension in VS Code:
-- **Cline** (recommended): Install from VS Code Marketplace
-- **Continue**: Another popular option with MCP support
-- Or any other MCP-compatible extension
+
+1. Open VS Code
+2. Go to Extensions (View > Extensions or `Cmd/Ctrl + Shift + X`)
+3. Search for and install one of these MCP-compatible extensions:
+   - **Cline** (recommended): Search for "Cline" or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)
+   - **Continue**: Search for "Continue" or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Continue.continue)
+   - Or any other MCP-compatible extension
 
 #### Step 2: Configure the MCP Server
 
@@ -127,7 +131,11 @@ Add the Copilot Agent Chain server to your MCP settings. The configuration locat
 
 **For other MCP clients:**
 
-Configure the server in your MCP client's settings file (usually `~/.config/mcp/settings.json` or similar):
+Configure the server in your MCP client's settings. The configuration method varies by extension:
+- For **Continue**: Configure in `.continue/config.json` in your project or home directory
+- For other clients: Check the extension's documentation for configuration instructions
+
+Example configuration format:
 
 ```json
 {
@@ -361,7 +369,7 @@ export AGENT_TIMEOUT=120s
    ls /path/to/your/repo/.github/agents/
    ```
 
-4. **Check VS Code's Output panel** (View > Output, select your MCP extension) for detailed error messages
+4. **Check VS Code's Output panel** (View > Output) and look for output channels named after your MCP extension (e.g., "Cline", "Continue") for detailed error messages
 
 5. **Try running the binary manually** to verify it works:
    ```bash
