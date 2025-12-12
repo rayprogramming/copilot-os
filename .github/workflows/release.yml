@@ -34,7 +34,16 @@ jobs:
 
       - name: Verify version tag format
         run: |
-          VERSION="${{ github.ref_name }}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION="${{ github.ref_name }}"
+          fi
+
+          if [ -z "$VERSION" ]; then
+            echo "❌ Version is required"
+            exit 1
+          fi
           if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "❌ Invalid version format: $VERSION"
             echo "Expected format: vX.Y.Z"
@@ -257,6 +266,11 @@ jobs:
         run: |
           echo "## Release Build Summary"
           echo ""
-          echo "**Version**: ${{ github.ref_name }}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION="${{ github.ref_name }}"
+          fi
+          echo "**Version**: ${VERSION}"
           echo "**Status**: ✅ Success"
           echo "**Artifacts**: Available in GitHub Release"
