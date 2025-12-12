@@ -1,0 +1,30 @@
+{
+  "prompt": "Review and improve the CLI invoker implementation",
+  "explicit_agents": ["code-reviewer", "test-generator", "documentation-writer"],
+  "description": "Example of explicitly specifying the agent chain instead of using automatic selection",
+  "expected_evaluation": {
+    "is_clear": true,
+    "confidence": 0.85,
+    "detected_issues": [],
+    "suggested_refinement": ""
+  },
+  "execution_mode": "explicit_chain",
+  "agent_execution_order": [
+    {
+      "position": 1,
+      "agent": "code-reviewer",
+      "receives_context": "original_prompt only"
+    },
+    {
+      "position": 2,
+      "agent": "test-generator",
+      "receives_context": "original_prompt + code-reviewer results"
+    },
+    {
+      "position": 3,
+      "agent": "documentation-writer",
+      "receives_context": "original_prompt + code-reviewer results + test-generator results"
+    }
+  ],
+  "notes": "When using explicit chain, the orchestrator validates all agents exist but doesn't perform keyword matching. Context accumulates sequentially."
+}

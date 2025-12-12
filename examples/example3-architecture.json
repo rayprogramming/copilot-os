@@ -1,0 +1,12 @@
+{
+  "prompt": "Design a caching layer for agent results considering cache invalidation strategies, memory constraints, and concurrent access patterns",
+  "description": "Example of an architecture discussion that should trigger the architecture-advisor agent",
+  "expected_evaluation": {
+    "is_clear": true,
+    "confidence": 0.88,
+    "detected_issues": [],
+    "suggested_refinement": ""
+  },
+  "expected_agents": ["architecture-advisor"],
+  "expected_keywords": ["architecture", "design"]
+}

@@ -1,0 +1,30 @@
+{
+  "prompt": "Perform a comprehensive review of the internal/prompt/evaluator.go module including code quality assessment, test coverage analysis, and documentation completeness",
+  "description": "Example of a multi-faceted request that should trigger multiple agents in a chain",
+  "expected_evaluation": {
+    "is_clear": true,
+    "confidence": 0.9,
+    "detected_issues": [],
+    "suggested_refinement": ""
+  },
+  "expected_agents": ["code-reviewer", "test-generator", "documentation-writer"],
+  "expected_keywords": ["code-review", "testing", "documentation", "review"],
+  "agent_chain_flow": {
+    "step_1": {
+      "agent": "code-reviewer",
+      "input_context": "original_prompt",
+      "output": "code_quality_assessment"
+    },
+    "step_2": {
+      "agent": "test-generator",
+      "input_context": "original_prompt + code_quality_assessment",
+      "output": "test_coverage_analysis"
+    },
+    "step_3": {
+      "agent": "documentation-writer",
+      "input_context": "original_prompt + code_quality_assessment + test_coverage_analysis",
+      "output": "documentation_review"
+    },
+    "final_synthesis": "Combined output from all three agents providing comprehensive module review"
+  }
+}

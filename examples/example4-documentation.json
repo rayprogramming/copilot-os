@@ -1,0 +1,12 @@
+{
+  "prompt": "Write comprehensive API documentation for the Orchestrator.RunWithAuto method including parameters, return values, usage examples, and common pitfalls",
+  "description": "Example of a documentation request that should trigger the documentation-writer agent",
+  "expected_evaluation": {
+    "is_clear": true,
+    "confidence": 0.87,
+    "detected_issues": [],
+    "suggested_refinement": ""
+  },
+  "expected_agents": ["documentation-writer"],
+  "expected_keywords": ["documentation", "api-docs"]
+}

@@ -1,0 +1,12 @@
+{
+  "prompt": "Generate comprehensive unit tests for the internal/agents/types.go Registry.MatchKeywords method covering edge cases like empty keywords, no matches, and scoring",
+  "description": "Example of a testing request that should trigger the test-generator agent",
+  "expected_evaluation": {
+    "is_clear": true,
+    "confidence": 0.9,
+    "detected_issues": [],
+    "suggested_refinement": ""
+  },
+  "expected_agents": ["test-generator"],
+  "expected_keywords": ["testing", "unit-test", "test"]
+}

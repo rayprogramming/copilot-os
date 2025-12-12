@@ -1,0 +1,17 @@
+{
+  "prompt": "Fix the thing in the module",
+  "description": "Example of a vague prompt that should trigger auto-refinement",
+  "expected_evaluation": {
+    "is_clear": false,
+    "confidence": 0.3,
+    "detected_issues": [
+      "contains vague term 'thing'",
+      "lacks specific context",
+      "no clear action specified"
+    ],
+    "suggested_refinement": "Fix the thing in the module. Please specify: which module (file path), which component or function, what specific issue needs fixing, and what the desired behavior should be."
+  },
+  "expected_agents": [],
+  "expected_keywords": [],
+  "notes": "The orchestrator should either return the refinement suggestion to the user for clarification, or attempt best-effort agent selection if configured for aggressive execution"
+}

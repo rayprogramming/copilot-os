@@ -1,0 +1,263 @@
+name: Release - Build and Package
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  validate:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.3'
+          cache: true
+
+      - name: Run tests before release
+        run: go test -v -race ./...
+
+      - name: Verify version tag format
+        run: |
+          VERSION="${{ github.ref_name }}"
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version format: $VERSION"
+            echo "Expected format: vX.Y.Z"
+            exit 1
+          fi
+          echo "✅ Version format valid: $VERSION"
+
+  build-release:
+    name: Build Release Artifacts
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: validate
+
+    strategy:
+      matrix:
+        include:
+          - os: linux
+            arch: amd64
+            runner: ubuntu-latest
+          - os: linux
+            arch: arm64
+            runner: ubuntu-latest
+          - os: darwin
+            arch: amd64
+            runner: macos-latest
+          - os: darwin
+            arch: arm64
+            runner: macos-latest
+          - os: windows
+            arch: amd64
+            runner: windows-latest
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.3'
+          cache: true
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION="${{ github.ref_name }}"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Build binary
+        run: |
+          mkdir -p dist
+          GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} \
+          go build -o dist/copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.os == 'windows' && '.exe' || '' }} \
+          -ldflags="-X main.Version=${{ steps.version.outputs.version }} -X main.BuildTime=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+          ./cmd/server
+        shell: bash
+
+      - name: Calculate checksums
+        run: |
+          cd dist
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            certUtil -hashfile copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}.exe SHA256 > copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}.exe.sha256
+          else
+            sha256sum copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }} > copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}.sha256
+          fi
+        shell: bash
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.os }}-${{ matrix.arch }}
+          path: dist/
+          retention-days: 7
+
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build-release
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p release-assets
+          find release-artifacts -type f -exec cp {} release-assets/ \;
+          ls -la release-assets/
+
+      - name: Generate release notes
+        id: release-notes
+        run: |
+          VERSION="${{ github.ref_name }}"
+          cat > release-notes.md << 'EOF'
+          # Copilot Agent Chain Release ${{ github.ref_name }}
+          
+          ## What's Changed
+          
+          ### Features & Improvements
+          - See the commits for detailed changes
+          
+          ### Bug Fixes
+          - See the commits for detailed fixes
+          
+          ## Download
+          
+          Pre-built binaries are available for multiple platforms:
+          
+          - **Linux x86_64**: `copilot-agent-chain-linux-amd64`
+          - **Linux ARM64**: `copilot-agent-chain-linux-arm64`
+          - **macOS Intel**: `copilot-agent-chain-darwin-amd64`
+          - **macOS Apple Silicon**: `copilot-agent-chain-darwin-arm64`
+          - **Windows x86_64**: `copilot-agent-chain-windows-amd64.exe`
+          
+          All binaries include SHA256 checksums for verification.
+          
+          ## Installation
+          
+          ```bash
+          # Download the appropriate binary for your platform
+          chmod +x copilot-agent-chain-linux-amd64  # On Linux/macOS
+          ./copilot-agent-chain-linux-amd64
+          ```
+          
+          ## Verification
+          
+          ```bash
+          sha256sum -c copilot-agent-chain-linux-amd64.sha256
+          ```
+          EOF
+          cat release-notes.md
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          bodyFile: release-notes.md
+          artifacts: release-assets/*
+          draft: false
+          prerelease: false
+          generateReleaseNotes: true
+
+  docker-build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: validate
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION="${{ github.ref_name }}"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: |
+            copilot-agent-chain:${{ steps.version.outputs.version }}
+            copilot-agent-chain:latest
+          outputs: type=docker,dest=/tmp/copilot-agent-chain-docker.tar
+          build-args: |
+            VERSION=${{ steps.version.outputs.version }}
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp/copilot-agent-chain-docker.tar
+          retention-days: 7
+
+  notify-release:
+    name: Release Notification
+    runs-on: ubuntu-latest
+    needs: [validate, build-release, create-release, docker-build]
+    if: always()
+
+    steps:
+      - name: Check release status
+        run: |
+          if [ "${{ needs.validate.result }}" = "failure" ] || \
+             [ "${{ needs.build-release.result }}" = "failure" ]; then
+            echo "❌ Release build failed"
+            exit 1
+          else
+            echo "✅ Release build successful"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## Release Build Summary"
+          echo ""
+          echo "**Version**: ${{ github.ref_name }}"
+          echo "**Status**: ✅ Success"
+          echo "**Artifacts**: Available in GitHub Release"

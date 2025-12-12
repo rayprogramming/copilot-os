@@ -1,0 +1,12 @@
+{
+  "prompt": "Review the internal/orchestrator/orchestrator.go file for code quality, performance issues, and potential improvements",
+  "description": "Example of a clear, specific prompt that should trigger the code-reviewer agent",
+  "expected_evaluation": {
+    "is_clear": true,
+    "confidence": 0.85,
+    "detected_issues": [],
+    "suggested_refinement": ""
+  },
+  "expected_agents": ["code-reviewer"],
+  "expected_keywords": ["code-review", "review", "performance", "quality"]
+}

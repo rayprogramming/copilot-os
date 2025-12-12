@@ -1,0 +1,12 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https://github\\.com/rayprogramming/copilot-agent-chain",
+      "comment": "Internal repository links are expected to work in the repo"
+    },
+    {
+      "pattern": "^https://github\\.com/modelcontextprotocol/",
+      "comment": "External MCP links may not always be available"
+    }
+  ]
+}

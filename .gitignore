@@ -1,0 +1,86 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.txt
+coverage.html
+
+# Go workspace file
+go.work
+
+# Build outputs
+/bin/
+/dist/
+/build/
+copilot-os
+server
+
+# Dependency directories
+vendor/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# Debug files
+debug
+__debug_bin
+
+# Test cache
+.test_cache/
+
+# Documentation build artifacts
+docs/_site/
+docs/.jekyll-cache/
+docs/.sass-cache/
+
+# MCP server state (if any)
+.mcp/
+
+# Backup files
+*.bak
+*.backup
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Profiling data
+*.prof
+*.pprof
+cpu.prof
+mem.prof
+
+# Benchmark results
+bench.txt
+benchmarks/

@@ -1,0 +1,42 @@
+# GitHub Pages Jekyll Configuration
+# This file configures how GitHub Pages builds the documentation site
+
+title: Copilot Agent Chain
+description: A Go-based MCP server that orchestrates intelligent agent chains using GitHub Copilot CLI
+baseurl: /copilot-agent-chain
+url: https://rayprogramming.github.io
+repository: rayprogramming/copilot-agent-chain
+
+# Theme
+theme: jekyll-theme-minimal
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+
+# Markdown processor
+markdown: kramdown
+kramdown:
+  auto_ids: true
+  toc_levels: 1..3
+
+# Build settings
+exclude:
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
+# Navigation
+header_pages:
+  - index.md
+  - guides/getting-started.md
+  - guides/development.md
+  - guides/architecture.md
+  - guides/agents.md
+  - api/index.md
+  - examples/index.md
+
+# Footer
+footer: "© 2025 Copilot Agent Chain. Licensed under MIT."
