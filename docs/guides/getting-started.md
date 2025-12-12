@@ -99,7 +99,7 @@ Install an MCP client extension in VS Code:
 1. Open VS Code
 2. Go to Extensions (View > Extensions or `Cmd/Ctrl + Shift + X`)
 3. Search for and install one of these MCP-compatible extensions:
-   - **Cline** (recommended): Search for "Cline" or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev)
+   - **Cline** (recommended): Search for "Cline" in the Extensions marketplace
    - **Continue**: Search for "Continue" or install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Continue.continue)
    - Or any other MCP-compatible extension
 
@@ -369,7 +369,7 @@ export AGENT_TIMEOUT=120s
    ls /path/to/your/repo/.github/agents/
    ```
 
-4. **Check VS Code's Output panel** (View > Output) and look for output channels named after your MCP extension (e.g., "Cline", "Continue") for detailed error messages
+4. **Check VS Code's Output panel** (View > Output or `Cmd/Ctrl + Shift + U`) and look for output channels named after your MCP extension (e.g., "Cline", "Continue") for detailed error messages
 
 5. **Try running the binary manually** to verify it works:
    ```bash
