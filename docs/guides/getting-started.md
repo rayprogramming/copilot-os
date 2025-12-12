@@ -369,7 +369,7 @@ export AGENT_TIMEOUT=120s
    ls /path/to/your/repo/.github/agents/
    ```
 
-4. **Check VS Code's Output panel** (View > Output or `Cmd/Ctrl + Shift + U`) and look for output channels named after your MCP extension (e.g., "Cline", "Continue") for detailed error messages
+4. **Check VS Code's Output panel** (View > Output or `Cmd/Ctrl + Shift + U`) for detailed error messages. After opening the Output panel, select the appropriate output channel from the dropdown (look for "Cline", "Continue", or your MCP extension's name)
 
 5. **Try running the binary manually** to verify it works:
    ```bash
