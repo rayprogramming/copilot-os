@@ -4,9 +4,8 @@ Complete automated build, test, and release pipeline for Copilot Agent Chain.
 
 ## 📋 Quick Links
 
-- **[Full CI/CD Guide](../../CI_CD_IMPLEMENTATION.md)** - Detailed implementation documentation
-- **[Pipeline Guide](../../docs/guides/cicd-pipeline.md)** - Complete usage guide
-- **[Makefile Reference](../../Makefile)** - Local build automation
+- **[Pipeline Guide](../docs/guides/cicd-pipeline.md)** - Complete usage guide
+- **[Makefile Reference](../Makefile)** - Local build automation
 - **[GitHub Actions](workflows/)** - Workflow definitions
 
 ## 🚀 Workflows Overview

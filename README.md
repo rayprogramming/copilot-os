@@ -2,7 +2,7 @@
 
 **Copilot Orchestration System** - A Go-based MCP (Model Context Protocol) server that orchestrates intelligent agent chains using GitHub Copilot CLI. The server automatically evaluates user prompts, selects optimal agents from your codebase's `.github/agents/` directory, chains them together with context flow, and returns synthesized results.
 
-**📖 Full Documentation**: [https://rayprogramming.github.io/copilot-os](https://rayprogramming.github.io/copilot-os)
+**📖 Full Documentation**: See the `docs/` folder for comprehensive guides
 
 ## Features
 

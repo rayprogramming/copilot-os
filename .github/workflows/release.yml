@@ -44,7 +44,6 @@ jobs:
 
   build-release:
     name: Build Release Artifacts
-    runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: validate
 

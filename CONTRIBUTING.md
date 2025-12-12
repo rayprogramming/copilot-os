@@ -121,7 +121,7 @@ Follow conventional commits format:
 
 ## Getting Help
 
-- 📖 Read the [full documentation](https://rayprogramming.github.io/copilot-os)
+- 📖 Read the documentation in the `docs/` folder
 - 🐛 Report bugs via [GitHub Issues](https://github.com/rayprogramming/copilot-os/issues)
 - 💬 Ask questions in discussions
 - 📧 Contact maintainers for major changes

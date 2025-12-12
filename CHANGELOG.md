@@ -63,5 +63,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Timeout and retry mechanisms
 - Context-aware cancellation
 
-[Unreleased]: https://github.com/rayprogramming/copilot-os/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/rayprogramming/copilot-os/releases/tag/v1.0.0
+[Unreleased]: https://github.com/rayprogramming/copilot-os/commits/main
