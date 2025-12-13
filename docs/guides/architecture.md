@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Architecture Guide
+nav_order: 2
+parent: Guides
 ---
 
 # Architecture Guide

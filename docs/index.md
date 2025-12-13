@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: home
 title: Copilot Agent Chain
+nav_order: 1
 ---
 
 # Copilot Agent Chain Documentation
