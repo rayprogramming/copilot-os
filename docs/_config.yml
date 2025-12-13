@@ -3,9 +3,9 @@
 
 title: Copilot Agent Chain
 description: A Go-based MCP server that orchestrates intelligent agent chains using GitHub Copilot CLI
-baseurl: /copilot-agent-chain
+baseurl: /copilot-os
 url: https://rayprogramming.github.io
-repository: rayprogramming/copilot-agent-chain
+repository: rayprogramming/copilot-os
 
 # Theme
 theme: jekyll-theme-minimal
