@@ -247,8 +247,7 @@ docker build -t copilot-agent-chain:test .
 
 ## 📖 More Information
 
-- **Full Guide**: [CI_CD_IMPLEMENTATION.md](../../CI_CD_IMPLEMENTATION.md)
-- **Pipeline Details**: [docs/guides/cicd-pipeline.md](../../docs/guides/cicd-pipeline.md)
+- **Pipeline Details**: [docs/guides/cicd-pipeline.md](../docs/guides/cicd-pipeline.md)
 - **Makefile Reference**: `make help`
 
 ## Support
