@@ -12,6 +12,7 @@ on:
       - main
     paths:
       - 'docs/**'
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -45,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: validate
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
 
     permissions:
       contents: read
