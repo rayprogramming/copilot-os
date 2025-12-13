@@ -12,6 +12,7 @@ theme: jekyll-theme-minimal
 
 # Plugins
 plugins:
+  - jekyll-sass-converter
   - jekyll-seo-tag
   - jekyll-github-metadata
 
