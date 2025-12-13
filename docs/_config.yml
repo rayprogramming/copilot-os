@@ -7,8 +7,8 @@ baseurl: /copilot-os
 url: https://rayprogramming.github.io
 repository: rayprogramming/copilot-os
 
-# Theme
-theme: jekyll-theme-minimal
+# Theme (disabled - using custom layout and styling)
+# theme: jekyll-theme-minimal
 
 # Plugins
 plugins:
