@@ -101,7 +101,7 @@ jobs:
         run: |
           mkdir -p dist
           GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} \
-          go build -o dist/copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.os == 'windows' && '.exe' || '' }} \
+          go build -o dist/copilot-os-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.os == 'windows' && '.exe' || '' }} \
           -ldflags="-X main.Version=${{ steps.version.outputs.version }} -X main.BuildTime=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
           ./cmd/server
         shell: bash
@@ -110,9 +110,9 @@ jobs:
         run: |
           cd dist
           if [ "${{ runner.os }}" = "Windows" ]; then
-            certUtil -hashfile copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}.exe SHA256 > copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}.exe.sha256
+            certUtil -hashfile copilot-os-${{ matrix.os }}-${{ matrix.arch }}.exe SHA256 > copilot-os-${{ matrix.os }}-${{ matrix.arch }}.exe.sha256
           else
-            sha256sum copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }} > copilot-agent-chain-${{ matrix.os }}-${{ matrix.arch }}.sha256
+            sha256sum copilot-os-${{ matrix.os }}-${{ matrix.arch }} > copilot-os-${{ matrix.os }}-${{ matrix.arch }}.sha256
           fi
         shell: bash
 
@@ -166,11 +166,11 @@ jobs:
           
           Pre-built binaries are available for multiple platforms:
           
-          - **Linux x86_64**: `copilot-agent-chain-linux-amd64`
-          - **Linux ARM64**: `copilot-agent-chain-linux-arm64`
-          - **macOS Intel**: `copilot-agent-chain-darwin-amd64`
-          - **macOS Apple Silicon**: `copilot-agent-chain-darwin-arm64`
-          - **Windows x86_64**: `copilot-agent-chain-windows-amd64.exe`
+          - **Linux x86_64**: `copilot-os-linux-amd64`
+          - **Linux ARM64**: `copilot-os-linux-arm64`
+          - **macOS Intel**: `copilot-os-darwin-amd64`
+          - **macOS Apple Silicon**: `copilot-os-darwin-arm64`
+          - **Windows x86_64**: `copilot-os-windows-amd64.exe`
           
           All binaries include SHA256 checksums for verification.
           
@@ -178,14 +178,14 @@ jobs:
           
           ```bash
           # Download the appropriate binary for your platform
-          chmod +x copilot-agent-chain-linux-amd64  # On Linux/macOS
-          ./copilot-agent-chain-linux-amd64
+          chmod +x copilot-os-linux-amd64  # On Linux/macOS
+          ./copilot-os-linux-amd64
           ```
           
           ## Verification
           
           ```bash
-          sha256sum -c copilot-agent-chain-linux-amd64.sha256
+          sha256sum -c copilot-os-linux-amd64.sha256
           ```
           EOF
           cat release-notes.md
@@ -232,9 +232,9 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: |
-            copilot-agent-chain:${{ steps.version.outputs.version }}
-            copilot-agent-chain:latest
-          outputs: type=docker,dest=/tmp/copilot-agent-chain-docker.tar
+            copilot-os:${{ steps.version.outputs.version }}
+            copilot-os:latest
+          outputs: type=docker,dest=/tmp/copilot-os-docker.tar
           build-args: |
             VERSION=${{ steps.version.outputs.version }}
 
@@ -242,7 +242,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: docker-image
-          path: /tmp/copilot-agent-chain-docker.tar
+          path: /tmp/copilot-os-docker.tar
           retention-days: 7
 
   notify-release:

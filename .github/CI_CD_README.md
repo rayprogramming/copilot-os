@@ -45,11 +45,11 @@ make help
 ### Build Outputs
 
 Binaries are created in `dist/`:
-- `copilot-agent-chain-linux-amd64`
-- `copilot-agent-chain-linux-arm64`
-- `copilot-agent-chain-darwin-amd64`
-- `copilot-agent-chain-darwin-arm64`
-- `copilot-agent-chain-windows-amd64.exe`
+- `copilot-os-linux-amd64`
+- `copilot-os-linux-arm64`
+- `copilot-os-darwin-amd64`
+- `copilot-os-darwin-arm64`
+- `copilot-os-windows-amd64.exe`
 
 Each binary includes a `.sha256` checksum file.
 
@@ -135,10 +135,10 @@ Build and run the Docker image:
 make docker-build
 
 # Run
-docker run -it copilot-agent-chain:latest serve
+docker run -it copilot-os:latest serve
 
 # With custom config
-docker run -e LOG_LEVEL=debug copilot-agent-chain:latest serve
+docker run -e LOG_LEVEL=debug copilot-os:latest serve
 ```
 
 The Docker image:
@@ -242,7 +242,7 @@ open coverage/coverage.html
 
 ### Docker Build Issues
 ```bash
-docker build -t copilot-agent-chain:test .
+docker build -t copilot-os:test .
 ```
 
 ## 📖 More Information
