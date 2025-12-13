@@ -88,7 +88,98 @@ export AGENT_TIMEOUT=60s
 
 ## Running Your First Agent Chain
 
-### Option 1: Run the Server Directly
+### Option 1: Use with GitHub Copilot in VS Code
+
+The MCP server integrates directly with GitHub Copilot Chat in VS Code, allowing you to access the agent orchestration capabilities through the Copilot interface.
+
+For detailed instructions on using MCP with GitHub Copilot, see the [official GitHub documentation](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp).
+
+#### Prerequisites
+
+- VS Code with GitHub Copilot extension installed
+- GitHub Copilot subscription
+- Built `copilot-agent-chain` binary
+
+#### Configuration
+
+Configure the MCP server for GitHub Copilot by creating or editing the MCP settings file:
+
+**Location:**
+- **macOS/Linux**: `~/.config/github-copilot/mcp_settings.json`
+- **Windows**: `%APPDATA%\github-copilot\mcp_settings.json`
+
+**Configuration:**
+
+```json
+{
+  "mcpServers": {
+    "copilot-agent-chain": {
+      "command": "/absolute/path/to/copilot-agent-chain",
+      "args": [],
+      "env": {
+        "REPO_ROOT": "/absolute/path/to/your/repo",
+        "LOG_LEVEL": "info"
+      }
+    }
+  }
+}
+```
+
+**Important Configuration Notes:**
+- Use **absolute paths** for both `command` and `REPO_ROOT`
+- Replace `/absolute/path/to/copilot-agent-chain` with the full path to your built binary
+- Replace `/absolute/path/to/your/repo` with the full path to the repository containing `.github/agents/`
+- Adjust `LOG_LEVEL` as needed: `debug`, `info`, `warn`, or `error`
+- Ensure the binary has executable permissions: `chmod +x /path/to/copilot-agent-chain`
+
+#### Example Configuration
+
+For a project in `/Users/yourname/projects/myrepo` with the binary in `/usr/local/bin`:
+
+```json
+{
+  "mcpServers": {
+    "copilot-agent-chain": {
+      "command": "/usr/local/bin/copilot-agent-chain",
+      "args": [],
+      "env": {
+        "REPO_ROOT": "/Users/yourname/projects/myrepo",
+        "LOG_LEVEL": "info"
+      }
+    }
+  }
+}
+```
+
+#### Restart and Verify
+
+1. **Restart VS Code** to load the new configuration
+2. **Open GitHub Copilot Chat** (View > Open View > GitHub Copilot Chat)
+3. **Verify the connection**: The MCP tools should now be available in Copilot Chat
+4. **Check available tools**: `run_with_orchestrator`, `list_agents`, `evaluate_prompt`, `run_agent`
+
+#### Using the Agent Chain in Copilot Chat
+
+Once configured, you can use the orchestrator tools directly in GitHub Copilot Chat:
+
+**List available agents:**
+```
+@workspace Use the list_agents tool to see all available agents
+```
+
+**Run with orchestrator:**
+```
+@workspace Use run_with_orchestrator to review the authentication module for security issues
+```
+
+**Run a specific agent:**
+```
+@workspace Use run_agent with agent="code-reviewer" to check internal/orchestrator/orchestrator.go
+```
+
+The orchestrator will automatically evaluate your prompt, select appropriate agents, chain them together, and return synthesized results.
+
+### Option 2: Run the Server Directly
 
 ```bash
 # Set repository root
@@ -107,7 +198,7 @@ You should see output like:
 2025-12-07T10:30:45.456Z	info	server	MCP server started	{"transport": "stdio"}
 ```
 
-### Option 2: Use with Copilot CLI
+### Option 3: Use with Copilot CLI
 
 In another terminal, run:
 
@@ -239,6 +330,61 @@ copilot auth status
 export AGENT_TIMEOUT=120s
 ./copilot-agent-chain
 ```
+
+### GitHub Copilot MCP server not connecting
+
+**Problem:** "Server failed to start" or MCP tools not appearing in Copilot Chat
+
+**Solution:** Check the following:
+
+1. **Verify the configuration file location:**
+   - macOS/Linux: `~/.config/github-copilot/mcp_settings.json`
+   - Windows: `%APPDATA%\github-copilot\mcp_settings.json`
+
+2. **Verify the binary path is absolute:**
+   ```json
+   {
+     "mcpServers": {
+       "copilot-agent-chain": {
+         "command": "/absolute/path/to/copilot-agent-chain",
+         ...
+       }
+     }
+   }
+   ```
+
+3. **Ensure the binary is executable:**
+   ```bash
+   chmod +x /path/to/copilot-agent-chain
+   ```
+
+4. **Check REPO_ROOT points to a valid directory:**
+   ```bash
+   ls /path/to/your/repo/.github/agents/
+   ```
+
+5. **Verify the JSON syntax is valid:** Use a JSON validator or check for missing commas, brackets, or quotes
+
+6. **Restart VS Code completely** after making configuration changes
+
+7. **Check GitHub Copilot's output logs** (View > Output or `Cmd/Ctrl + Shift + U`, then select "GitHub Copilot" from the dropdown) for detailed error messages
+
+8. **Try running the binary manually** to verify it works:
+   ```bash
+   REPO_ROOT=/path/to/your/repo /path/to/copilot-agent-chain
+   ```
+
+### MCP tools not appearing in Copilot Chat
+
+**Problem:** Server starts but tools aren't available in GitHub Copilot Chat
+
+**Solution:**
+
+1. **Verify GitHub Copilot extension is active** in VS Code
+2. **Reload VS Code window** (Cmd/Ctrl + Shift + P → "Reload Window")
+3. **Check agent discovery** by running the binary manually and verifying "Discovered agents" appears in the output
+4. **Ensure `.github/agents/` directory exists** and contains valid agent definition files (`.md` files with YAML frontmatter)
+5. **Check the configuration syntax** matches the example format exactly
 
 ## Next Steps
 
