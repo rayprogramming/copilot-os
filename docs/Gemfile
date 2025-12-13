@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+# GitHub Pages bundle includes Jekyll, theme, and common plugins
+# Keep dependencies aligned with the GitHub Pages build environment
+# https://pages.github.com/versions/
+gem "github-pages", group: :jekyll_plugins
+
+# Required for running Jekyll with Ruby 3 locally
+# https://github.com/jekyll/jekyll/issues/8523
+gem "webrick", "~> 1.8"
