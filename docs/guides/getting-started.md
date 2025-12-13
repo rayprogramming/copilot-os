@@ -7,7 +7,7 @@ parent: Guides
 
 # Getting Started Guide
 
-This guide walks you through installing Copilot Agent Chain, setting up your repository, and running your first agent chain.
+This guide walks you through installing CoPilot OS, setting up your repository, and running your first agent chain.
 
 ## Prerequisites
 

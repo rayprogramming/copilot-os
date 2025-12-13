@@ -7,4 +7,4 @@ has_children: true
 
 # Guides
 
-Learn how to use, develop, and extend Copilot Agent Chain with our comprehensive guides.
+Learn how to use, develop, and extend CoPilot OS with our comprehensive guides.

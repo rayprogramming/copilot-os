@@ -1,6 +1,6 @@
 # GitHub Actions CI/CD Pipeline
 
-Complete automated build, test, and release pipeline for Copilot Agent Chain.
+Complete automated build, test, and release pipeline for CoPilot OS.
 
 ## 📋 Quick Links
 

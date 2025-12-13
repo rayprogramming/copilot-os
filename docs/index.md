@@ -1,16 +1,16 @@
 ---
 layout: home
-title: Copilot Agent Chain
+title: CoPilot OS
 nav_order: 1
 ---
 
-# Copilot Agent Chain Documentation
+# CoPilot OS Documentation
 
-Welcome to the **Copilot Agent Chain** documentation! This site provides comprehensive guidance for using, developing, and extending the intelligent agent orchestration system.
+Welcome to the **CoPilot OS** documentation! This site provides comprehensive guidance for using, developing, and extending the intelligent agent orchestration system.
 
-## What is Copilot Agent Chain?
+## What is CoPilot OS?
 
-**Copilot Agent Chain** is a Go-based MCP (Model Context Protocol) server that orchestrates intelligent agent chains using GitHub Copilot CLI. The server automatically evaluates user prompts, selects optimal agents from your codebase's `.github/agents/` directory, chains them together with context flow, and returns synthesized results.
+**CoPilot OS** (CoPilot Orchestration System) is a Go-based MCP (Model Context Protocol) server that orchestrates intelligent agent chains using GitHub Copilot CLI. The server automatically evaluates user prompts, selects optimal agents from your codebase's `.github/agents/` directory, chains them together with context flow, and returns synthesized results.
 
 ### Key Features
 
@@ -25,7 +25,7 @@ Welcome to the **Copilot Agent Chain** documentation! This site provides compreh
 ## Getting Started
 
 Start with the **[Getting Started Guide](guides/getting-started.md)** to:
-- Install Copilot Agent Chain
+- Install CoPilot OS
 - Configure your repository
 - Run your first agent chain
 
@@ -51,7 +51,7 @@ Start with the **[Getting Started Guide](guides/getting-started.md)** to:
 ### 🔧 Additional Resources
 
 - **[Troubleshooting](guides/troubleshooting.md)** — Common issues and solutions
-- **[Contributing](guides/contributing.md)** — How to contribute to Copilot Agent Chain
+- **[Contributing](guides/contributing.md)** — How to contribute to CoPilot OS
 - **[Project Status](status/implementation.md)** — Project completion status and test coverage
 
 ## System Architecture
@@ -121,7 +121,7 @@ We welcome contributions! See the **[Contributing Guide](guides/contributing.md)
 
 ## License
 
-Copilot Agent Chain is licensed under the MIT License. See the LICENSE file in the repository for details.
+CoPilot OS is licensed under the MIT License. See the LICENSE file in the repository for details.
 
 ## Support
 

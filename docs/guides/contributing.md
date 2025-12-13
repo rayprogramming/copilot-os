@@ -5,7 +5,7 @@ title: Contributing Guide
 
 # Contributing Guide
 
-Thank you for your interest in contributing to Copilot Agent Chain! This guide will help you get started.
+Thank you for your interest in contributing to CoPilot OS! This guide will help you get started.
 
 ## Getting Started
 

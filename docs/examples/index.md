@@ -6,7 +6,7 @@ nav_order: 4
 
 # Examples & Scenarios
 
-This section provides real-world usage examples and integration patterns for Copilot Agent Chain.
+This section provides real-world usage examples and integration patterns for CoPilot OS.
 
 ## Quick Examples
 

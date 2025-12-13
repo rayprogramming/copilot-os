@@ -1,4 +1,4 @@
-# Example Prompts for Copilot Agent Chain
+# Example Prompts for CoPilot OS
 
 This directory contains example prompts and expected behaviors for the orchestrator.
 

@@ -152,7 +152,7 @@ jobs:
         run: |
           VERSION="${{ github.ref_name }}"
           cat > release-notes.md << 'EOF'
-          # Copilot Agent Chain Release ${{ github.ref_name }}
+          # CoPilot OS Release ${{ github.ref_name }}
           
           ## What's Changed
           

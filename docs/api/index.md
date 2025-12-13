@@ -6,7 +6,7 @@ nav_order: 3
 
 # API Reference
 
-This section provides complete documentation for the Copilot Agent Chain MCP server's tools, interfaces, and APIs.
+This section provides complete documentation for the CoPilot OS MCP server's tools, interfaces, and APIs.
 
 ## MCP Tools
 

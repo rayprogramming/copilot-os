@@ -1,8 +1,8 @@
 # GitHub Pages Jekyll Configuration
 # This file configures how GitHub Pages builds the documentation site
 
-title: Copilot Agent Chain
-description: A Go-based MCP server that orchestrates intelligent agent chains using GitHub Copilot CLI
+title: CoPilot OS
+description: CoPilot Orchestration System — A Go-based MCP server that orchestrates intelligent agent chains using GitHub Copilot CLI
 baseurl: /copilot-os
 url: https://rayprogramming.github.io
 repository: rayprogramming/copilot-os
@@ -18,7 +18,7 @@ heading_anchors: true
 aux_links:
   "GitHub": https://github.com/rayprogramming/copilot-os
   "Issues": https://github.com/rayprogramming/copilot-os/issues
-footer_content: "© 2025 Copilot Agent Chain. Licensed under MIT."
+footer_content: "© 2025 CoPilot OS. Licensed under MIT."
 
 # Plugins
 plugins:

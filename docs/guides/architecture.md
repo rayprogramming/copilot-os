@@ -7,11 +7,11 @@ parent: Guides
 
 # Architecture Guide
 
-This document describes the system architecture, design decisions, and component interactions in Copilot Agent Chain.
+This document describes the system architecture, design decisions, and component interactions in CoPilot OS.
 
 ## System Overview
 
-Copilot Agent Chain is a Model Context Protocol (MCP) server that orchestrates agent chains. It acts as a bridge between external callers (Copilot CLI, VS Code, etc.) and agents defined in a repository's `.github/agents/` directory.
+CoPilot OS is a Model Context Protocol (MCP) server that orchestrates agent chains. It acts as a bridge between external callers (Copilot CLI, VS Code, etc.) and agents defined in a repository's `.github/agents/` directory.
 
 ```
 External Caller (Copilot CLI)

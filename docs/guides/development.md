@@ -7,7 +7,7 @@ parent: Guides
 
 # Development Guide
 
-This guide covers local setup, building, testing, and contributing to the Copilot Agent Chain repository.
+This guide covers local setup, building, testing, and contributing to the CoPilot OS repository.
 
 ## Prerequisites
 
