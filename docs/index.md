@@ -78,13 +78,14 @@ Start with the **[Getting Started Guide](guides/getting-started.md)** to:
 ## Quick Example
 
 ```bash
-# Point to your repository
-export REPO_ROOT=/path/to/your/repo
-
 # Build the server
 go build -o copilot-agent-chain ./cmd/server
 
-# Run the server
+# Run from your repository root (discovers agents from ./.github/agents/)
+./copilot-agent-chain
+
+# Or point to a specific repository
+export REPO_ROOT=/path/to/your/repo
 ./copilot-agent-chain
 
 # Use it with Copilot CLI

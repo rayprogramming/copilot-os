@@ -119,7 +119,7 @@ Configure the MCP server for GitHub Copilot by creating or editing the MCP setti
       "command": "/absolute/path/to/copilot-agent-chain",
       "args": [],
       "env": {
-        "REPO_ROOT": "/absolute/path/to/your/repo",
+        "REPO_ROOT": "${workspaceFolder}",
         "LOG_LEVEL": "info"
       }
     }
@@ -128,15 +128,15 @@ Configure the MCP server for GitHub Copilot by creating or editing the MCP setti
 ```
 
 **Important Configuration Notes:**
-- Use **absolute paths** for both `command` and `REPO_ROOT`
-- Replace `/absolute/path/to/copilot-agent-chain` with the full path to your built binary
-- Replace `/absolute/path/to/your/repo` with the full path to the repository containing `.github/agents/`
+- Use **absolute path** for `command` — Replace `/absolute/path/to/copilot-agent-chain` with the full path to your built binary
+- Use `${workspaceFolder}` for `REPO_ROOT` — VS Code will automatically resolve this to your current workspace
+- If you need to use a different repository, you can specify an absolute path instead: `"REPO_ROOT": "/absolute/path/to/your/repo"`
 - Adjust `LOG_LEVEL` as needed: `debug`, `info`, `warn`, or `error`
 - Ensure the binary has executable permissions: `chmod +x /path/to/copilot-agent-chain`
 
 #### Example Configuration
 
-For a project in `/Users/yourname/projects/myrepo` with the binary in `/usr/local/bin`:
+With the binary in `/usr/local/bin` and using the current workspace:
 
 ```json
 {
@@ -145,13 +145,15 @@ For a project in `/Users/yourname/projects/myrepo` with the binary in `/usr/loca
       "command": "/usr/local/bin/copilot-agent-chain",
       "args": [],
       "env": {
-        "REPO_ROOT": "/Users/yourname/projects/myrepo",
+        "REPO_ROOT": "${workspaceFolder}",
         "LOG_LEVEL": "info"
       }
     }
   }
 }
 ```
+
+**Note:** The `${workspaceFolder}` variable is automatically resolved by VS Code to the current workspace directory. This makes your configuration portable across different machines and users.
 
 #### Restart and Verify
 
@@ -360,10 +362,11 @@ export AGENT_TIMEOUT=120s
    chmod +x /path/to/copilot-agent-chain
    ```
 
-4. **Check REPO_ROOT points to a valid directory:**
+4. **Check your workspace has the required directory structure:**
    ```bash
-   ls /path/to/your/repo/.github/agents/
+   ls .github/agents/
    ```
+   The workspace should contain a `.github/agents/` directory with agent definition files.
 
 5. **Verify the JSON syntax is valid:** Use a JSON validator or check for missing commas, brackets, or quotes
 
