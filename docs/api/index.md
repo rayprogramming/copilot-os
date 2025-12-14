@@ -193,7 +193,7 @@ Configure the server via environment variables:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `REPO_ROOT` | Current directory | Path to repository with `.github/agents/` |
+| `REPO_ROOT` | Current directory | Path to repository with `.github/agents/`. Use `${workspaceFolder}` in VS Code MCP config. |
 | `LOG_LEVEL` | `info` | Logging level: `debug`, `info`, `warn`, `error` |
 | `AGENT_TIMEOUT` | `30s` | Timeout for individual agent execution |
 | `MCP_TRANSPORT` | `stdio` | MCP transport: `stdio` (HTTP support pending) |

@@ -24,11 +24,25 @@ All configuration is done via environment variables. There is no configuration f
 export REPO_ROOT=/home/user/my-project
 ```
 
+**VS Code MCP Configuration**:
+When configuring the MCP server in VS Code, use the `${workspaceFolder}` variable for automatic workspace resolution:
+```json
+{
+  "mcpServers": {
+    "copilot-agent-chain": {
+      "env": {
+        "REPO_ROOT": "${workspaceFolder}"
+      }
+    }
+  }
+}
+```
+
 **Notes**:
 - Can be absolute or relative path
 - Must contain `.github/agents/` directory
 - Agents are scanned on server startup
-- Use `$(pwd)` to reference current directory
+- Use `$(pwd)` in shell or `${workspaceFolder}` in VS Code to reference current directory
 
 ### LOG_LEVEL
 
@@ -187,6 +201,29 @@ export CACHE_TTL=4h
 
 ./copilot-agent-chain
 ```
+
+### VS Code MCP Configuration
+
+When using the MCP server with VS Code, configure it in `~/.config/github-copilot/mcp_settings.json` (macOS/Linux) or `%APPDATA%\github-copilot\mcp_settings.json` (Windows):
+
+```json
+{
+  "mcpServers": {
+    "copilot-agent-chain": {
+      "command": "/absolute/path/to/copilot-agent-chain",
+      "args": [],
+      "env": {
+        "REPO_ROOT": "${workspaceFolder}",
+        "LOG_LEVEL": "info",
+        "CACHE_SIZE": "1000",
+        "CACHE_TTL": "1h"
+      }
+    }
+  }
+}
+```
+
+**Note:** The `${workspaceFolder}` variable is automatically resolved by VS Code to the current workspace directory, making your configuration portable across different machines and projects.
 
 ## Agent Configuration
 

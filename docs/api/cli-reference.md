@@ -170,11 +170,19 @@ copilot --agent=code-reviewer --prompt "Review the agent selection algorithm"
 
 **Usage**:
 ```bash
+# Shell
 export REPO_ROOT=/home/user/my-project
 ./copilot-agent-chain
+
+# VS Code MCP Configuration (mcp_settings.json)
+{
+  "env": {
+    "REPO_ROOT": "${workspaceFolder}"
+  }
+}
 ```
 
-**Purpose**: Location of repository containing `.github/agents/` directory.
+**Purpose**: Location of repository containing `.github/agents/` directory. When using VS Code MCP integration, use `${workspaceFolder}` to automatically reference the current workspace.
 
 ### LOG_LEVEL
 

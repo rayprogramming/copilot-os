@@ -35,12 +35,15 @@ go build -o copilot-os ./cmd/server
 ### Running the Server
 
 ```bash
-# Point to your repository
+# Run from your repository root (agents discovered from ./.github/agents/)
+./copilot-os
+
+# Or point to a specific repository
 export REPO_ROOT=/path/to/your/repo
 ./copilot-os
 ```
 
-The server will start listening on stdio and automatically discover agents from `$REPO_ROOT/.github/agents/`.
+The server will start listening on stdio and automatically discover agents from the repository's `.github/agents/` directory.
 
 ### Using from Copilot CLI
 
@@ -243,7 +246,7 @@ The orchestrator will:
 
 Configuration via environment variables:
 
-- `REPO_ROOT` — Path to repository with agents (default: current directory)
+- `REPO_ROOT` — Path to repository with agents (default: current directory). When using VS Code MCP integration, use `${workspaceFolder}` to automatically reference the current workspace.
 - `LOG_LEVEL` — Logging level: debug, info, warn, error (default: info)
 - `CACHE_ENABLED` — Enable result caching (default: true)
 - `COPILOT_CLI_TIMEOUT` — Timeout for Copilot CLI calls in seconds (default: 300)
